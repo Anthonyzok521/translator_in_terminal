@@ -1,0 +1,14 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "translator_for_cmd_bash.exe",
+      "name": "translator_for_cmd_bash.exe",
+      "args": [], // Test arguments "--help", "-h", "--text", "-t", "--file", "-f", "--lang", "-l"
+      "currentDir": "${workspaceRoot}"
+    }
+  ]
+}

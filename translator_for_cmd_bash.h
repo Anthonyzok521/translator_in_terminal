@@ -4,5 +4,17 @@
 #pragma once
 
 #include <iostream>
+using namespace std;
 
-// TODO: Reference additional headers your program requires here.
+class Translator {
+private:
+	string _params[3][2] = { {"-t", "--text"}, {"-l", "--language"}, {"-f","--file"} };
+
+public:
+	Translator(string textOrPath, string params[]) {
+		cout << "text: "<<textOrPath;
+		for (int i = 0; i < 3; i++) {
+			cout << params[i];
+		}
+	}
+};
