@@ -2,7 +2,7 @@
 // or project specific include files.
 
 #pragma once
-
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
 #include "httplib.h"
 using namespace std;

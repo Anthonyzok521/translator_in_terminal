@@ -15,8 +15,6 @@ int main(int argc, char **argv)
 {
 	try
 	{
-		verifyArgs(argc);
-		cout << "SUCCESS!";
 		Client cli("https://jsonplaceholder.typicode.com");
 		auto res = cli.Get("/todos/1");
 		if (res && res->status == 200) {
@@ -25,8 +23,10 @@ int main(int argc, char **argv)
 		else {
 			cerr << "Error: " << res->status << endl;
 		}
+		verifyArgs(argc);
+		cout << "SUCCESS!";
 	}
-	catch (const runtime_error& e) {
+	catch (const exception& e) {
 		cerr << "Error: " << e.what() << endl;
 	}
 	return 0;
