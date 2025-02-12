@@ -1,0 +1,5 @@
+[requires]
+cpp-httplib/0.18.3
+
+[generators]
+cmake

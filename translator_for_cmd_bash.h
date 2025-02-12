@@ -4,7 +4,9 @@
 #pragma once
 
 #include <iostream>
+#include "httplib.h"
 using namespace std;
+using namespace httplib;
 
 class Translator {
 private:
