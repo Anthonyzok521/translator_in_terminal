@@ -1,4 +1,5 @@
 CmakeFiles/
+vcpkg_installed/
 out/
 .vs/
 *.bat
