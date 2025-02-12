@@ -3,4 +3,3 @@ vcpkg_installed/
 build/
 out/
 .vs/
-*.bat
