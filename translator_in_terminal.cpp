@@ -1,7 +1,7 @@
 ﻿// translator_for_cmd_bash.cpp : Defines the entry point for the application.
 //
 
-#include "translator_for_cmd_bash.h"
+#include "translator_in_terminal.h"
 
 using namespace std;
 
