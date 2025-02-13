@@ -1,7 +1,8 @@
 # Translator in Terminal
 
 ## Configuration in CMD (Windows)
-> [!NOTE] Use text unicode
+> [!NOTE] 
+> Use text unicode
 ```shell
 chcp 65001
 ```

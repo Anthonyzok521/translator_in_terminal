@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/Antho/source/repos/translator_for_cmd_bash
+CMAKE_SOURCE_DIR = /mnt/c/Users/Antho/source/repos/translator_in_terminal
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/Antho/source/repos/translator_for_cmd_bash
+CMAKE_BINARY_DIR = /mnt/c/Users/Antho/source/repos/translator_in_terminal
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Antho/source/repos/translator_for_cmd_bash/CMakeFiles /mnt/c/Users/Antho/source/repos/translator_for_cmd_bash//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Antho/source/repos/translator_in_terminal/CMakeFiles /mnt/c/Users/Antho/source/repos/translator_in_terminal//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Antho/source/repos/translator_for_cmd_bash/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Antho/source/repos/translator_in_terminal/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named translator_for_cmd_bash
+# Target rules for targets named translator_in_terminal
 
 # Build rule for target.
-translator_for_cmd_bash: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 translator_for_cmd_bash
-.PHONY : translator_for_cmd_bash
+translator_in_terminal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 translator_in_terminal
+.PHONY : translator_in_terminal
 
 # fast build rule for target.
-translator_for_cmd_bash/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_for_cmd_bash.dir/build.make CMakeFiles/translator_for_cmd_bash.dir/build
-.PHONY : translator_for_cmd_bash/fast
+translator_in_terminal/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_in_terminal.dir/build.make CMakeFiles/translator_in_terminal.dir/build
+.PHONY : translator_in_terminal/fast
 
-translator_for_cmd_bash.o: translator_for_cmd_bash.cpp.o
-.PHONY : translator_for_cmd_bash.o
+translator_in_terminal.o: translator_in_terminal.cpp.o
+.PHONY : translator_in_terminal.o
 
 # target to build an object file
-translator_for_cmd_bash.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_for_cmd_bash.dir/build.make CMakeFiles/translator_for_cmd_bash.dir/translator_for_cmd_bash.cpp.o
-.PHONY : translator_for_cmd_bash.cpp.o
+translator_in_terminal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_in_terminal.dir/build.make CMakeFiles/translator_in_terminal.dir/translator_in_terminal.cpp.o
+.PHONY : translator_in_terminal.cpp.o
 
-translator_for_cmd_bash.i: translator_for_cmd_bash.cpp.i
-.PHONY : translator_for_cmd_bash.i
+translator_in_terminal.i: translator_in_terminal.cpp.i
+.PHONY : translator_in_terminal.i
 
 # target to preprocess a source file
-translator_for_cmd_bash.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_for_cmd_bash.dir/build.make CMakeFiles/translator_for_cmd_bash.dir/translator_for_cmd_bash.cpp.i
-.PHONY : translator_for_cmd_bash.cpp.i
+translator_in_terminal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_in_terminal.dir/build.make CMakeFiles/translator_in_terminal.dir/translator_in_terminal.cpp.i
+.PHONY : translator_in_terminal.cpp.i
 
-translator_for_cmd_bash.s: translator_for_cmd_bash.cpp.s
-.PHONY : translator_for_cmd_bash.s
+translator_in_terminal.s: translator_in_terminal.cpp.s
+.PHONY : translator_in_terminal.s
 
 # target to generate assembly for a file
-translator_for_cmd_bash.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_for_cmd_bash.dir/build.make CMakeFiles/translator_for_cmd_bash.dir/translator_for_cmd_bash.cpp.s
-.PHONY : translator_for_cmd_bash.cpp.s
+translator_in_terminal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/translator_in_terminal.dir/build.make CMakeFiles/translator_in_terminal.dir/translator_in_terminal.cpp.s
+.PHONY : translator_in_terminal.cpp.s
 
 # Help Target
 help:
@@ -161,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... translator_for_cmd_bash"
-	@echo "... translator_for_cmd_bash.o"
-	@echo "... translator_for_cmd_bash.i"
-	@echo "... translator_for_cmd_bash.s"
+	@echo "... translator_in_terminal"
+	@echo "... translator_in_terminal.o"
+	@echo "... translator_in_terminal.i"
+	@echo "... translator_in_terminal.s"
 .PHONY : help
 
 

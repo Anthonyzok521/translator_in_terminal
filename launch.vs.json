@@ -5,8 +5,8 @@
     {
       "type": "default",
       "project": "CMakeLists.txt",
-      "projectTarget": "translator_for_cmd_bash.exe",
-      "name": "translator_for_cmd_bash.exe",
+      "projectTarget": "translate.exe",
+      "name": "translate.exe",
       "args": [], // Test arguments "--help", "-h", "--text", "-t", "--file", "-f", "--lang", "-l"
       "currentDir": "${workspaceRoot}"
     }
