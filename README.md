@@ -1,8 +1,14 @@
 # Translator in Terminal
 
+## Configuration in CMD (Windows)
+> [!NOTE] Use text unicode
+```shell
+chcp 65001
+```
+
 ## Example
 ```shell
-$ translator -t "hello" -l "en-es"
+$ translate -t "hello" -l "en-es"
 
 hola
 ```
