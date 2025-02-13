@@ -6,7 +6,7 @@ if (POLICY CMP0141)
     set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("translator_in_terminal")
+project ("translate")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,10 +19,10 @@ find_package(jsoncons CONFIG REQUIRED)
 include_directories(libs)
 
 # Add source to this project's executable.
-add_executable (translator_in_terminal "translator_in_terminal.cpp")
+add_executable (translate "translator_in_terminal.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.20)
-    set_property(TARGET translator_in_terminal PROPERTY CXX_STANDARD 20)
+    set_property(TARGET translate PROPERTY CXX_STANDARD 20)
 endif()
 
-target_link_libraries(translator_in_terminal PRIVATE httplib::httplib OpenSSL::SSL OpenSSL::Crypto jsoncons)
+target_link_libraries(translate PRIVATE httplib::httplib OpenSSL::SSL OpenSSL::Crypto jsoncons)
