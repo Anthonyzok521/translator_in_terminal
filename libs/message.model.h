@@ -24,6 +24,10 @@ public:
             << "Content: " << content << "\n"
             << "Refusal: " << (refusal.empty() ? "null" : refusal) << "\n";
     }
+
+    void printMessage() const {
+        std::cout << content << "\n";
+    }
 };
 
 class Choice {

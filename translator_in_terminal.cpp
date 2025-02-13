@@ -3,6 +3,35 @@
 
 #include "libs/translator_in_terminal.h"
 #include "libs/message.model.h"
+#include <fstream>
+#include <sstream>
+#include <unordered_map>
+
+unordered_map<string, string> loadEnv(const string& filePath) {
+	unordered_map<string, string> envVars;
+	ifstream file(filePath);
+
+	if (!file.is_open()) {
+		throw runtime_error(".env not found");
+	}
+
+	string line;
+	while (getline(file, line)) {
+		if (line.empty() || line[0] == '#') {
+			continue;
+		}
+
+		size_t delimiterPos = line.find('=');
+		if (delimiterPos != string::npos) {
+			string key = line.substr(0, delimiterPos);
+			string value = line.substr(delimiterPos + 1);
+			envVars[key] = value;
+		}
+	}
+
+	file.close();
+	return envVars;
+}
 
 void verifyArgs(int argc) {
 	if (!(argc > 1)) {
@@ -14,11 +43,15 @@ int main(int argc, char** argv)
 {
 	try
 	{
+		unordered_map<string, string> env = loadEnv(".env");
+
+		string API_KEY = env["API_KEY"];
+		string auth = "Bearer " + API_KEY;		
 
 		verifyArgs(argc);
 		Client cli("https://openrouter.ai");
 		cli.set_default_headers({
-			{ "Authorization", "Bearer API_KEY" }
+			{ "Authorization", auth }
 			});
 		auto res = cli.Post("/api/v1/chat/completions", R"({
 			"model": "google/gemini-2.0-flash-thinking-exp:free",
@@ -38,8 +71,11 @@ int main(int argc, char** argv)
 			json jsonData = json::parse(res->body);
 
 			ChatCompletion chatCompletion = parseChatCompletion(jsonData);
+			
+			//debug
+			//chatCompletion.print();
 
-			chatCompletion.print();
+			chatCompletion.choices[0].message.printMessage();
 		}
 		else {
 			cerr << "Error: " << res->status << endl;
