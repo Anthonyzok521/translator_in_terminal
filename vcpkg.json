@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "dependencies": [
     "cpp-httplib",
-    "jsoncons"
-  ],
-  "overrides": [
+    "jsoncons",
     {
       "name": "openssl",
-      "version": "3.4.0",
       "platform": "windows"
     }
   ]
