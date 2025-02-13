@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 		verifyArgs(argc);
 		Client cli("https://openrouter.ai");
 		cli.set_default_headers({
-			{ "Authorization", "Bearer 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" }
+			{ "Authorization", "Bearer API_KEY" }
 			});
 		auto res = cli.Post("/api/v1/chat/completions", R"({
 			"model": "google/gemini-2.0-flash-thinking-exp:free",
