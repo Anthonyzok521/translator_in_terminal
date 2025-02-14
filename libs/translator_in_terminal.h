@@ -42,14 +42,14 @@ public:
 
 	Tlr(string auth) : auth(auth) {}
 
-	void verifyArgs(Args args) {
+	string verifyArgs(Args args) {
 		if (args.argc == 2 && (args.argv[1] == arguments[3].first || args.argv[1] == arguments[3].second)) {
 			printHelp();
-			return;
+			return "no-translate";
 		}
 		if (args.argc == 2 && (args.argv[1] == arguments[4].first || args.argv[1] == arguments[4].second)) {
 			printVersion();
-			return;
+			return "no-translate";
 		}
 		if (args.argc < 5) {
 			throw runtime_error(format(
@@ -186,6 +186,8 @@ public:
 		if (!lang_provided) {
 			throw runtime_error("Language must be specified with --lang or -l.");
 		}
+
+		return "translate";
 	}
 
 
@@ -194,49 +196,25 @@ public:
 Usage: translate [options]
 
 Options:
--t, --text <"your_text">					Translate the given text.
--f, --file <"your_path_file.txt">			Translate the content of the file.
--l, --lang <"from_lang-to_lang" or "to_lang">	Language codes (e.g., "en-es", "en").
--h, --help		Display this help message.
+  -t, --text <"your_text">        Translate the given text.
+  -f, --file <"your_path_file.txt">  Translate the content of the file.
+  -L, --lang <"from_lang-to_lang" or "to_lang">  Language codes (e.g., "en-es", "en").
+  -h, --help                      Display this help message.
 
 Language Codes:
-es: Spanish
-en: English
-fr: French
-de: German
-it: Italian
-pt: Portuguese
-ru: Russian
-ja: Japanese
-zh: Chinese (Mandarin)
-ar: Arabic
-ko: Korean
-sv: Swedish
-nl: Dutch
-pl: Polish
-hu: Hungarian
-el: Greek
-vi: Vietnamese
-th: Thai
-id: Indonesian
-bn: Bengali
-tr: Turkish
-sw: Swahili
-yo: Yoruba
-zu: Zulu
-am: Amharic
-nah: Nahuatl
-qu: Quechua
-myn: Maya
-hi: Hindi
-fa: Persian
-he: Hebrew
-uk: Ukrainian
-cs: Czech
+  es: Spanish       en: English       fr: French       de: German
+  it: Italian       pt: Portuguese    ru: Russian      ja: Japanese
+  zh: Chinese (Mandarin)  ar: Arabic  ko: Korean       sv: Swedish
+  nl: Dutch         pl: Polish        hu: Hungarian    el: Greek
+  vi: Vietnamese    th: Thai          id: Indonesian   bn: Bengali
+  tr: Turkish       sw: Swahili       yo: Yoruba       zu: Zulu
+  am: Amharic       nah: Nahuatl      qu: Quechua      myn: Maya
+  hi: Hindi         fa: Persian       he: Hebrew       uk: Ukrainian
+  cs: Czech
 
 Examples:
-translate -t "Hola" -l "en"				// Translate "Hola" to English.
-translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to English
+  translate -t "Hola" -l "en"       Translate "Hola" to English.
+  translate --file "myFile.txt" --lang "es-en"  Translate from Spanish to English.
 )" << endl;
 	}
 	void printVersion() {
@@ -257,7 +235,7 @@ translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to Englis
 			"messages": [
 	{
 	  "role": "system",
-	  "content": "Eres un traductor de idioma. Solo recibes una entrada y tu salida es traducirlo al idioma que se te indique. La sintaxis será la siguiente: frase - idioma y respondes con solo la traducción sin argumentar más nada ni decir otra cosa. Otra sintaxis también válida es la siguiente: frase - código del idioma. Los código de idioma son: en para inglés, es para español y otros que te agreguen."
+	  "content": "Eres un traductor de idioma. Solo recibes una entrada y tu salida es traducirlo al idioma que se te indique. La sintaxis será la siguiente: frase - idioma y respondes con solo la traducción sin argumentar más nada ni decir otra cosa. Otra sintaxis también válida es la siguiente: frase - código del idioma. Los código de idioma son: 'en' para inglés, 'es' para español sin las comillas y otros que te agreguen. Si no se te indica un texto o el idioma, responde en inglés diciendo que no se puede traducir. Recuerda siempre traducir y nunca responder directamente, si te hacen preguntas personales, solo traduce al idioma que se te indique. Eres asistente sólo para traducir palabras."
 	},
 	{
 	  "role": "user",
@@ -293,7 +271,7 @@ translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to Englis
 	},
 	{
 	  "role": "user",
-	  "content": ")" + input + " " + lang + R"("
+	  "content": ")" + input + ". " + lang + R"("
 	}
 	],
 	"generationConfig": {
