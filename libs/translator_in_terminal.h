@@ -6,7 +6,6 @@
 #define VERSION "1.0.0"
 #include "message.model.h"
 #include <iostream>
-#include <format>
 #include <vector>
 #include <cstring>
 #include "httplib.h"
@@ -52,48 +51,50 @@ public:
 			return "no-translate";
 		}
 		if (args.argc < 5) {
-			throw runtime_error(format(
-				"To execute indicate by means of the argument:\n\n"
-				"[NOTE]\n"
-				"use:\n"
-				"\t--text, -t <\"your_text\"> --lang, -l <\"from_lang-to_lang\">\n"
-				"or:\n"
-				"\t--file, -f <\"your_path_file.txt\"> --lang, -l <\"to_lang\">\n\n"
-				"[CODES LANG]\n"
-				"+ \"Spanish\", \"es\",\n"
-				"+ \"English\", \"en\",\n"
-				"+ \"French\", \"fr\",\n"
-				"+ \"German\", \"de\",\n"
-				"+ \"Italian\", \"it\",\n"
-				"+ \"Portuguese\", \"pt\",\n"
-				"+ \"Russian\", \"ru\",\n"
-				"+ \"Japanese\", \"ja\",\n"
-				"+ \"Chinese (Mandarin)\", \"zh\",\n"
-				"+ \"Arabic\", \"ar\",\n"
-				"+ \"Korean\", \"ko\",\n"
-				"+ \"Swedish\", \"sv\",\n"
-				"+ \"Dutch\", \"nl\",\n"
-				"+ \"Polish\", \"pl\",\n"
-				"+ \"Hungarian\", \"hu\",\n"
-				"+ \"Greek\", \"el\",\n"
-				"+ \"Vietnamese\", \"vi\",\n"
-				"+ \"Thai\", \"th\",\n"
-				"+ \"Indonesian\", \"id\",\n"
-				"+ \"Bengali\", \"bn\",\n"
-				"+ \"Turkish\", \"tr\",\n"
-				"+ \"Swahili\", \"sw\",\n"
-				"+ \"Yoruba\", \"yo\",\n"
-				"+ \"Zulu\", \"zu\",\n"
-				"+ \"Amharic\", \"am\",\n"
-				"+ \"Nahuatl\", \"nah\",\n"
-				"+ \"Quechua\", \"qu\",\n"
-				"+ \"Maya\", \"myn\",\n"
-				"+ \"Hindi\", \"hi\",\n"
-				"+ \"Persian\", \"fa\",\n"
-				"+ \"Hebrew\", \"he\",\n"
-				"+ \"Ukrainian\", \"uk\",\n"
-				"+ \"Czech\", \"cs\""
-			));
+			throw runtime_error(R"(
+				To execute indicate by means of the argument:
+
+				[NOTE]
+				use:
+					--text, -t <"your_text"> --lang, -l <"from_lang-to_lang">
+				or:
+					--file, -f <"your_path_file.txt"> --lang, -l <"to_lang">
+
+				[CODES LANG]
+				+ "Spanish", "es",
+				+ "English", "en",
+				+ "French", "fr",
+				+ "German", "de",
+				+ "Italian", "it",
+				+ "Portuguese", "pt",
+				+ "Russian", "ru",
+				+ "Japanese", "ja",
+				+ "Chinese Mandarin", "zh",
+				+ "Arabic", "ar",
+				+ "Korean", "ko",
+				+ "Swedish", "sv",
+				+ "Dutch", "nl",
+				+ "Polish", "pl",
+				+ "Hungarian", "hu",
+				+ "Greek", "el",
+				+ "Vietnamese", "vi",
+				+ "Thai", "th",
+				+ "Indonesian", "id",
+				+ "Bengali", "bn",
+				+ "Turkish", "tr",
+				+ "Swahili", "sw",
+				+ "Yoruba", "yo",
+				+ "Zulu", "zu",
+				+ "Amharic", "am",
+				+ "Nahuatl", "nah",
+				+ "Quechua", "qu",
+				+ "Maya", "myn",
+				+ "Hindi", "hi",
+				+ "Persian", "fa",
+				+ "Hebrew", "he",
+				+ "Ukrainian", "uk",
+				+ "Czech", "cs"
+			)");
 		}
 		if (args.argc > 5) {
 			throw runtime_error("Number of invalid arguments.");			
@@ -179,7 +180,7 @@ public:
 			}
 
 			if (!valid_arg) {
-				throw runtime_error(format("Invalid argument: {}\n\nExecute -h, --help for more information.", args.argv[j]));
+				throw runtime_error("Invalid argument: " + string(args.argv[j]) + "\n\nExecute - h, --help for more information.");
 			}
 		}
 
