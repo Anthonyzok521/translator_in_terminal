@@ -89,6 +89,38 @@ Examples:
   translate --file "myFile.txt" --lang "es-en"  Translate from Spanish to English.
 ```
 
+## Development and Compilation
+
+### Prerequisites for Compilation
+To compile the project, you need the following tools installed:
+- **CMake**: Required for building the project. `cmake >= 3.28`, `C++ 20`
+- **vcpkg**: A C++ package manager to handle dependencies.
+- **OpenSSL**: Required for secure communication with the Gemini API.
+
+### Compilation Scripts
+The project includes scripts to automate the compilation process using CMake. These scripts are located in the `bin` directory:
+- **For Windows**: Use `cmake_compiler.bat`.
+- **For Linux**: Use `cmake_compiler.sh`.
+
+#### Steps to Compile
+1. Navigate to the project's root directory.
+2. Run the appropriate script based on your operating system:
+   - **Windows**:
+     ```shell
+     bin\cmake_compiler.bat
+     ```
+   - **Linux**:
+     ```bash
+     bash bin/cmake_compiler.sh
+     ```
+
+3. After compilation, the executable will be generated in the specified output directory.
+> [!IMPORTANT]
+> **`.env` File**: Ensure that the `.env` file is present in the same directory as the executable. This file must contain your Gemini API key:
+>  ```plaintext
+>  API_KEY=your_gemini_api_key
+> ```
+
 ## Author
 - [@Anthonyzok521](https://www.github.com/Anthonyzok521) - **Advanced Community**
 
