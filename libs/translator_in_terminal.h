@@ -3,7 +3,7 @@
 
 #pragma once
 #define CPPHTTPLIB_OPENSSL_SUPPORT
-
+#define VERSION "1.0.0"
 #include "libs/message.model.h"
 #include <iostream>
 #include <format>
@@ -36,7 +36,7 @@ private:
 	};
 	string input;
 	string output;
-	string lang = "en-es";
+	string lang;
 	string auth;
 
 public:
@@ -50,7 +50,11 @@ public:
 			printHelp();
 			return;
 		}
-		if (!(args.argc > 2)) {
+		if (args.argc == 2 && (args.argv[1] == arguments[4].first || args.argv[1] == arguments[4].second)) {
+			printVersion();
+			return;
+		}
+		if (args.argc <= 5) {
 			throw runtime_error(format(
 				"To execute indicate by means of the argument:\n\n"
 				"[NOTE]\n"
@@ -94,81 +98,91 @@ public:
 				"+ \"Czech\", \"cs\""
 			));
 		}
-
+		if (args.argc > 5) {
+			throw runtime_error("Number of invalid arguments.");			
+		}
 		bool text_provided = false;
 		bool file_provided = false;
 		bool lang_provided = false;
 		bool help_requested = false;
 
 		for (int i = 1; i < args.argc; i++) {
-			for (const auto& arg_pair : arguments) {
-				if (arg_pair.first == "-h" || arg_pair.first == "--help") {
-					help_requested = true;
-				}
-				else if (arg_pair.first == "-t" || arg_pair.first == "--text") {
-					if (help_requested) {
-						throw runtime_error("Cannot use --help in this context.");
-					}
-					if (file_provided) {
-						throw runtime_error("Cannot use --text and --file together.");
-					}
-					text_provided = true;
-					if (i + 1 < args.argc) {
-						input = args.argv[i + 1];
-						i++;
-					}
-					else {
-						throw runtime_error("Missing text after -t/--text");
-					}
-				}
-				else if (arg_pair.first == "-f" || arg_pair.first == "--file") {
-					if (help_requested) {
-						throw runtime_error("Cannot use --help in this context.");
-					}
-					if (text_provided) {
-						throw runtime_error("Cannot use --text and --file together.");
-					}
-					file_provided = true;
-					if (i + 1 < args.argc) {
-						input = args.argv[i + 1];
-						i++;
-					}
-					else {
-						throw runtime_error("Missing filename after -f/--file");
-					}
-				}
-				else if (arg_pair.first == "-l" || arg_pair.first == "--lang") {
-					lang_provided = true;
-					if (i + 1 < args.argc) {
-						lang = args.argv[i + 1];
-						i++;
-					}
-					else {
-						throw runtime_error("Missing language after -l/--lang");
-					}
-				}
-				break;
+			if (args.argv[i] == arguments[3].first || args.argv[i] == arguments[3].second) {
+				help_requested = true;
+				throw runtime_error("Cannot use -h, --help in this context.");
 			}
-		}
-		
-		for (int i = 1; i < args.argc; i++) {
-			bool valid_arg = false;
+			if (args.argv[i] == arguments[4].first || args.argv[i] == arguments[4].second) {
+				throw runtime_error("Cannot use -v, --version in this context.");
+			}
+			if (args.argv[i] == arguments[0].first || args.argv[i] == arguments[0].second) {
+				if (file_provided) {
+					throw runtime_error("Cannot use --text and --file together.");
+				}
+				text_provided = true;
+				if (i + 1 < args.argc) {
+					input = args.argv[i + 1];
+					i++;
+				}
+				else {
+					throw runtime_error("Missing text after -t/--text");
+				}
+			}
+			if (args.argv[i] == arguments[2].first || args.argv[i] == arguments[2].second) {
 
+				if (text_provided) {
+					throw runtime_error("Cannot use --text and --file together.");
+				}
+				file_provided = true;
+				if (i + 1 < args.argc) {
+					input = args.argv[i + 1];
+					i++;
+				}
+				else {
+					throw runtime_error("Missing filename after -f/--file");
+				}
+			}
+			if (args.argv[i] == arguments[1].first || args.argv[i] == arguments[1].second) {
+				lang_provided = true;
+				if (i + 1 < args.argc) {
+					lang = args.argv[i + 1];
+					i++;
+				}
+				else {
+					throw runtime_error("Missing language after -l/--lang");
+				}
+			}			
+		}
+
+		int sizeArgs = args.argc;
+		char** listArgs = args.argv;
+		int j = 1;
+
+		while(j < sizeArgs) {
+			bool valid_arg = false;
 			for (const auto& arg_pair : arguments) {
 				 
-				if (args.argv[i] == arg_pair.first || args.argv[i] == arg_pair.second || 
-					((args.argv[i] == arguments[0].first || args.argv[i] == arguments[0].second) && string(args.argv[i + 1]).find("-") == string::npos) ||
-					((args.argv[i] == arguments[1].first || args.argv[i] == arguments[1].second) && string(args.argv[i + 1]).find("-") == string::npos) ||
-					((args.argv[i] == arguments[2].first || args.argv[i] == arguments[2].second) && string(args.argv[i + 1]).find("-") == string::npos)
+				if ((listArgs[j] == arg_pair.first || listArgs[j] == arg_pair.second ||
+					((listArgs[j] == arguments[0].first || listArgs[j] == arguments[0].second) && string(listArgs[j + 1]).find("-") == string::npos) ||
+					((listArgs[j] == arguments[1].first || listArgs[j] == arguments[1].second) && string(listArgs[j + 1]).find("-") == string::npos) ||
+					((listArgs[j] == arguments[2].first || listArgs[j] == arguments[2].second) && string(listArgs[j + 1]).find("-") == string::npos)) &&
+					!help_requested
 				) {
 					valid_arg = true;
-					cout << args.argv[i] << endl;
-					cout << args.argv[i + 1] << endl;
+					if (sizeArgs != 3) {
+						listArgs[1] = listArgs[3];
+						listArgs[2] = listArgs[4];
+						sizeArgs = 3;
+						j = 1;
+					}
+					else {
+						j = sizeArgs;
+					}
 					break;
 				}
 			}
+
 			if (!valid_arg) {
-				throw runtime_error(format("Invalid argument: {}\n\nExecute -h, --help for more information.", args.argv[i]));
+				throw runtime_error(format("Invalid argument: {}\n\nExecute -h, --help for more information.", args.argv[j]));
 			}
 		}
 
@@ -176,8 +190,6 @@ public:
 			throw runtime_error("Language must be specified with --lang or -l.");
 		}
 
-		cout << this->input << endl;
-		cout << this->lang << endl;
 	}
 
 
@@ -230,6 +242,13 @@ Examples:
 translate -t "Hola" -l "en"				// Translate "Hola" to English.
 translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to English
 )" << endl;
+	}
+	static void printVersion() {
+		cout << "Advanced Community - 2025" << endl;
+		cout << "github - https://github.com/Anthonyzok521/translator_in_terminal.git"<<endl;
+		cout << "project - translator_in_terminal" << endl;
+		cout << "version - ";
+		cout<<VERSION << endl;
 	}
 
 	/*

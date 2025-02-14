@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 		string auth = "Bearer " + API_KEY;		
 
 		Tlr(auth, Args(argc, argv));
-		Tlr::printHelp();
+
 	}
 	catch (const exception& e) {
 		cerr << "Error: " << e.what() << endl;
