@@ -1,4 +1,4 @@
-﻿// translator_for_cmd_bash.h : Include file for standard system include files,
+﻿// translator_in_terminal.h : Include file for standard system include files,
 // or project specific include files.
 
 #pragma once
@@ -35,15 +35,12 @@ private:
 		{"-v", "--version"}
 	};
 	string input;
-	string output;
 	string lang;
 	string auth;
 
 public:
 
-	Tlr(string auth, Args args) : auth(auth) {
-		this->verifyArgs(args);
-	}
+	Tlr(string auth) : auth(auth) {}
 
 	void verifyArgs(Args args) {
 		if (args.argc == 2 && (args.argv[1] == arguments[3].first || args.argv[1] == arguments[3].second)) {
@@ -54,7 +51,7 @@ public:
 			printVersion();
 			return;
 		}
-		if (args.argc <= 5) {
+		if (args.argc < 5) {
 			throw runtime_error(format(
 				"To execute indicate by means of the argument:\n\n"
 				"[NOTE]\n"
@@ -189,11 +186,10 @@ public:
 		if (!lang_provided) {
 			throw runtime_error("Language must be specified with --lang or -l.");
 		}
-
 	}
 
 
-	static void printHelp() {
+	void printHelp() {
 		cout << R"(
 Usage: translate [options]
 
@@ -243,7 +239,7 @@ translate -t "Hola" -l "en"				// Translate "Hola" to English.
 translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to English
 )" << endl;
 	}
-	static void printVersion() {
+	void printVersion() {
 		cout << "Advanced Community - 2025" << endl;
 		cout << "github - https://github.com/Anthonyzok521/translator_in_terminal.git"<<endl;
 		cout << "project - translator_in_terminal" << endl;
@@ -251,13 +247,12 @@ translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to Englis
 		cout<<VERSION << endl;
 	}
 
-	/*
-	static void translate(string text) {
+	void translate() {
 		Client cli("https://openrouter.ai");
 		cli.set_default_headers({
 			{ "Authorization", this->auth }
 			});
-		auto res = cli.Post("/api/v1/chat/completions", format(R"({
+		auto res = cli.Post("/api/v1/chat/completions", R"({
 			"model": "google/gemini-2.0-flash-thinking-exp:free",
 			"messages": [
 	{
@@ -298,7 +293,7 @@ translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to Englis
 	},
 	{
 	  "role": "user",
-	  "content": "{}"
+	  "content": ")" + input + " " + lang + R"("
 	}
 	],
 	"generationConfig": {
@@ -308,7 +303,7 @@ translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to Englis
 	  "maxOutputTokens": 8192,
 	  "responseMimeType": "text/plain"
 	}
-			  })", text), "application/json");
+			  })", "application/json");
 		  if (res && res->status == 200) {
 			  json jsonData = json::parse(res->body);
 
@@ -322,10 +317,5 @@ translate --file "myFile.txt" --lang "es-en"	// Translate from Spanish to Englis
 		  else {
 			  cerr << "Error: " << res->status << endl;
 		  }
-		  cout << "text: " << textOrPath;
-		  for (int i = 0; i < 3; i++) {
-			  cout << params[i];
-		  }
 	  }
-	  */
 };

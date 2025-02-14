@@ -26,3 +26,6 @@ if (CMAKE_VERSION VERSION_GREATER 3.20)
 endif()
 
 target_link_libraries(translate PRIVATE httplib::httplib OpenSSL::SSL OpenSSL::Crypto jsoncons)
+file(COPY
+    .env
+    DESTINATION ${CMAKE_BINARY_DIR})

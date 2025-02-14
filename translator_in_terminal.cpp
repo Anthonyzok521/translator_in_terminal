@@ -1,4 +1,4 @@
-﻿// translator_for_cmd_bash.cpp : Defines the entry point for the application.
+﻿// translator_in_terminal.cpp : Defines the entry point for the application.
 //
 
 #include "libs/translator_in_terminal.h"
@@ -11,7 +11,7 @@ unordered_map<string, string> loadEnv(const string& filePath) {
 	ifstream file(filePath);
 
 	if (!file.is_open()) {
-		throw runtime_error(".env not found");
+		throw runtime_error(".env not found with your API_KEY (Gemini)");
 	}
 
 	string line;
@@ -41,7 +41,11 @@ int main(int argc, char** argv)
 		string API_KEY = env["API_KEY"];
 		string auth = "Bearer " + API_KEY;		
 
-		Tlr(auth, Args(argc, argv));
+		Tlr *trl = new Tlr(auth);
+		trl->verifyArgs(Args(argc, argv));
+		trl->translate();
+
+		delete trl;
 
 	}
 	catch (const exception& e) {
