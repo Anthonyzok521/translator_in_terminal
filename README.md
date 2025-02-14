@@ -31,7 +31,7 @@ Translator in Terminal is a command-line tool written in C++ that allows you to 
   ```bash
   source ~/.bashrc  # or source ~/.zshrc
   ```
-```
+
 ## Configuration in CMD (Windows)
 
 > [!NOTE]
