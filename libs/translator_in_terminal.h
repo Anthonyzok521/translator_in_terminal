@@ -4,7 +4,7 @@
 #pragma once
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #define VERSION "1.0.0"
-#include "libs/message.model.h"
+#include "message.model.h"
 #include <iostream>
 #include <format>
 #include <vector>
