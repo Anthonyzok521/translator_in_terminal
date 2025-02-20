@@ -1,7 +1,7 @@
-﻿// translator_in_terminal.cpp : Defines the entry point for the application.
+﻿// main.cpp : Defines the entry point for the application.
 //
 
-#include "libs/translator_in_terminal.h"
+#include "../libs/args.h"
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
