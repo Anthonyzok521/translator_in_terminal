@@ -23,11 +23,14 @@ private:
     string input;
     string lang;
     string auth;
+    string path;
 
     void validateArgsCount(int argc);
     void validateArgument(const string& arg, const string& nextArg, bool& flag, const string& errorMessage);
     void processArguments(Args args);
     void validateRemainingArguments(Args args);
+    void validateFileExtension(string path);
+    string readFile(string path);
 
 public:
     Tlr(string auth);
