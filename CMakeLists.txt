@@ -19,7 +19,7 @@ find_package(jsoncons CONFIG REQUIRED)
 include_directories(libs)
 
 # Add source to this project's executable.
-add_executable (translate "translator_in_terminal.cpp")
+add_executable (translate "src/main.cpp" "src/args.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.20)
     set_property(TARGET translate PROPERTY CXX_STANDARD 20)
